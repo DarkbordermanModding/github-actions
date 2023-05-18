@@ -1,0 +1,10 @@
+github:
+  description: Github Actions for game modding.
+  enable_discussions: false
+  enable_issues: false
+  enable_projects: false
+  enable_wiki: false
+  homepage: https://github.com/DarkbordermanModding/github-actions
+  template: false
+  topics:
+    - github-actions
