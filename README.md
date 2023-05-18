@@ -1,3 +1,3 @@
 # github-actions
 
-Github Actions for modding process automations.
+Github Actions for game modding.
