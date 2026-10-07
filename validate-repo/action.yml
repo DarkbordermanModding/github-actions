@@ -1,0 +1,20 @@
+name: Validate repo
+description: Check a mod repo's LICENSE against LICENSE.template and its metadata.yml sections. Run after actions/checkout.
+# Usage in a mod repo job:
+#   - uses: actions/checkout@v4
+#   - uses: DarkbordermanModding/github-actions/validate-repo@master
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Install dependencies
+      shell: bash
+      run: pip install pyyaml
+
+    - name: Validate
+      shell: bash
+      run: python "$GITHUB_ACTION_PATH/validate_repo.py"

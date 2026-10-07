@@ -1,0 +1,28 @@
+name: Update github.io
+description: Ask darkbordermanmodding.github.io to re-sync this repo's entry on the mod page.
+# Usage in a mod repo job:
+#   - uses: DarkbordermanModding/github-actions/update-github-io@master
+#     with:
+#       token: ${{ secrets.PAGES_DISPATCH_TOKEN }}
+
+inputs:
+  token:
+    description: "Token allowed to dispatch to darkbordermanmodding.github.io (Contents: read and write)"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Send repository_dispatch
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        REPO: ${{ github.event.repository.name }}
+        REF: ${{ github.ref_name }}
+        SHA: ${{ github.sha }}
+      run: |
+        gh api repos/DarkbordermanModding/darkbordermanmodding.github.io/dispatches \
+          -f event_type=mod-updated \
+          -f "client_payload[repo]=$REPO" \
+          -f "client_payload[ref]=$REF" \
+          -f "client_payload[sha]=$SHA"
